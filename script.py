@@ -26,8 +26,8 @@ while True:
 
 
 # Set def_email and def_password according to sender's email id
-    def_email = 'utsavsiddhpuragreat@gmail.com'
-    def_password = 'utsavisgreat'
+    def_email = ''
+    def_password = ''
 
 # Opening of amazon product link code
     driver = webdriver.Chrome(PATH)
