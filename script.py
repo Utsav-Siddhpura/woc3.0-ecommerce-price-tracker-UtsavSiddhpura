@@ -7,6 +7,9 @@ from email.message import EmailMessage
 import time
 import datetime
 PATH = "C:\\Program Files (x86)\\chromedriver.exe"
+linkVar = input("Please enter the product link of amazon here : ")
+desired_priceVar = float(input("Enter desired product price here : "))
+emailVar = input("Enter Your Email-Id here : ")
 while True:
     timeVar = datetime.datetime.now()
     try:
@@ -17,17 +20,14 @@ while True:
         textFile = open("timeInfo.txt","r")
         lastTime = datetime.datetime.strptime(textFile.read(),"%c")
         textFile.close()
-        deltatime = (lastTime - timeVar).total_seconds()
-        if deltatime < 7200 :
-            time.sleep(7200-deltatime)
+        deltatime = (timeVar - lastTime).total_seconds()
+        if deltatime < 60 :
+            time.sleep(60-deltatime)
 
-    linkVar = input("Please enter the product link of amazon here : ")
-    desired_priceVar = float(input("Enter desired product price here : "))
-    emailVar = input("Enter Your Email-Id here : ")
 
 # Set def_email and def_password according to sender's email id
-    def_email = ''
-    def_password = ''
+    def_email = 'utsavsiddhpuragreat@gmail.com'
+    def_password = 'utsavisgreat'
 
 # Opening of amazon product link code
     driver = webdriver.Chrome(PATH)
@@ -53,7 +53,9 @@ while True:
         msgstr = str("Hey, Wake up!!\n\n Price of your favourite product \n\""+product_name+"\"\n have now dropped as low as Rs " + str(priceVar) + ", as you wished for.\n\nSo what are you waiting for!! Go and get it.....\n" + linkVar )
         msg.set_content(msgstr)
         sendEmail(msg)
+        driver.quit()
         exit()
+    driver.quit()
     textFile = open ("timeInfo.txt", "w")
     timeVar = datetime.datetime.now()
     textFile.write(timeVar.strftime("%c"))
